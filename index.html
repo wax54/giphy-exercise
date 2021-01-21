@@ -11,16 +11,16 @@
 
 <body>
 <div class="container">
-  <form class="row" id="search-form">
-    <div class="col-8">
+  <form class="row justify-content-around" id="search-form">
+  
+    <input class="btn btn-dark col-3" type="submit" id="submit" value="Find Me A GIF">
+    <div class="col-6">
       <input class="form-control" type="text" id="query" value="Robots">
     </div>
-    <div class="col-4">
-      <input class="btn btn-primary" type="submit" id="submit" value="Find Me A GIF">
-    </div>
+      <input class="btn btn-danger col-2 " type="button" id="reset" value="Throw It All Away">
   </form>
 </div>
-<img src="" class="img-thumbnail">
+<div id="img-container" class="container-fluid text-center">
 </div>
 
 <script src="https://code.jquery.com/jquery-3.2.1.js"></script>

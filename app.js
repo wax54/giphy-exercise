@@ -1,6 +1,10 @@
 $('#search-form').on('submit', handleSubmit);
-console.log()
+$('#reset').on('click', trashGifs);
 const getSearchTerm = () => $('#query').val();
+
+function trashGifs() {
+    $('#img-container').text('');
+}
 
 function handleSubmit(evt) {
     evt.preventDefault();
@@ -9,29 +13,28 @@ function handleSubmit(evt) {
 }
 
 async function displayNewGif(searchQuery) {
-    const res = await axios.get('https://api.giphy.com/v1/gifs/search',
+    const res = await axios.get('https://api.giphy.com/v1/gifs/random',
         {
             params: {
-                q: searchQuery,
-                limit: 1,
-                api_key: 'MhAodEJIJxQMxW9XqxKjyXfNYdLoOIym'
-
+                tag: searchQuery,
+                api_key: 'MhAodEJIJxQMxW9XqxKjyXfNYdLoOIym',
+                
             }
         });
-    console.log(res.data.data[0].images.original.url);
-    addImageToBody(res.data.data[0].images.original.url);
+    addImageToDOM(res.data.data.images.original.url);
 }
 
 
-function addImageToBody(imgUrl, id) {
+function addImageToDOM(imgUrl) {
     const $img = newImage(imgUrl);
-    $img.attr('id', id);
-
-    $('body').append($img);
+    $('#img-container').append($img);
 }
 
 function newImage(src) {
-    const $img = $('<img class="img-thumbnail">');
+
+    const $img = $('<img class="img">');
+    $img.attr('height', '300px')
     $img.attr('src', src);
-    return $img;
+    return $('<span class="col-xl-4 col-md-6">').append($img);
+
 }
